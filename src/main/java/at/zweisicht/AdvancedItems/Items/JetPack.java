@@ -4,7 +4,6 @@ import at.zweisicht.AdvancedItems.AdvancedItems;
 import at.zweisicht.AdvancedItems.ItemManager;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -73,13 +72,14 @@ public class JetPack
 					lore.set(i,"Durability: " + (dura -1));
 
 					if(dura == 0){
+						p.sendMessage(plugin.getConfig().getString("Settings.Language.destory").replace("&","§").replace("<item>", name));
 						p.getInventory().setChestplate(null);
 						p.updateInventory();
 						return;
 					}
 				}
 			}
-
+			p.sendMessage(plugin.getConfig().getString("Settings.Language.jetpack").replace("&","§"));
 			flyMode.put(p.getUniqueId(), new FlyMode(p).runTaskTimer(plugin, 1, 1));
 		}
 
@@ -128,6 +128,7 @@ public class JetPack
 					p.updateInventory();
 
 				}else{
+					p.sendMessage(plugin.getConfig().getString("Settings.Language.out_of_fuel").replace("&","§"));
 					useJetPack(p);
 				}
 

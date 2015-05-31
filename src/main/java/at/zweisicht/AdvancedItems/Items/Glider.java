@@ -70,6 +70,7 @@ public class Glider
 					lore.set(i,"Durability: " + (dura -1));
 
 					if(dura == 0){
+						p.sendMessage(plugin.getConfig().getString("Settings.Language.destory").replace("&","§").replace("<item>", meta.getDisplayName()));
 						p.setItemInHand(null);
 						p.updateInventory();
 						return;
@@ -77,6 +78,7 @@ public class Glider
 				}
 			}
 
+			p.sendMessage(plugin.getConfig().getString("Settings.Language.glider").replace("&","§"));
 			glideMode.put(p.getUniqueId(), new GliderMode(p).runTaskTimer(plugin, 1, 1));
 		}
 

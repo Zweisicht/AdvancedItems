@@ -1,12 +1,22 @@
+Settings:
+    Language:
+        out_of_fuel: 'Dir ist der Treibstoff ausgegangen'
+        use_jetpack: 'Wuuusch....'
+        use_glider: 'Wie eine Wolke...'
+        use_hook: ''
+        destroy: 'Dein <item> ist dir zu bruch gegangen!'
 Jetpack:
     Name: Jetpack
     Lore:
-    - Fliegt zu gut!
+    - &fRechtsklick zum anlegen.
+    - &fDanach doppel sprung zum losfliegen!
+    - '&7Durability: 100'
 Glider:
-    Name: Jetpack
+    Name: Gleiter
     Lore:
-    - Fliegt zu gut! Off
+    - &fRechtsklick um zu Gleiten.
+    - '&7Durability: 50'
 Hook:
-    Name: Jetpack
+    Name: Enterhaken
     Lore:
-    - Fliegt zu gut!
+    - &fRechtsklick um dich rüberzuschwingen.
