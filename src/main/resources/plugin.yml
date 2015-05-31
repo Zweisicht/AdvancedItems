@@ -1,0 +1,11 @@
+name: AdvancedItems
+main: at.zweisicht.AdvancedItems.AdvancedItems
+version: 0.1
+
+commands:
+   advanceditems:
+      description: Basisbefehl fuer AdvancedItems
+      usage: /<command>
+      permission: AdvancedItems.admin
+      permission-message: You don't have <permission>
+
