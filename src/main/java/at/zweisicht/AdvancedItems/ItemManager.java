@@ -55,11 +55,34 @@ public class ItemManager
 
 		}
 
-		if(!item.hasItemMeta()) return false;
-		if(!item.getItemMeta().hasDisplayName()) return false;
+		if(!item.hasItemMeta() || !item.getItemMeta().hasDisplayName() || !item.getItemMeta().hasLore()) return false;
 		if(item.getItemMeta().getDisplayName().equals(control_item.getItemMeta().getDisplayName())) return true;
 
 		return false;
+	}
+
+	public void setDurability(Player p, ItemStack itemStack){
+
+		ItemMeta meta = itemStack.getItemMeta();
+		List<String> lore = meta.getLore();
+
+		for(int i = 0; i < meta.getLore().size(); i++){
+
+			if(lore.get(i).contains("Durability:")){
+				int dura = Integer.parseInt(lore.get(i).substring(12 + lore.get(i).indexOf("Durability:")));
+				lore.set(i,lore.get(i).replace(" " + dura,  " " + (dura -1)));
+
+				if(dura == 0){
+					p.getInventory().setChestplate(null);
+					p.sendMessage(plugin.getConfig().getString("Settings.Language.destroy").replaceAll("&", "§").replaceAll("<item>", meta.getDisplayName()));
+					p.setAllowFlight(false);
+				}
+			}
+		}
+
+		meta.setLore(lore);
+		itemStack.setItemMeta(meta);
+		p.updateInventory();
 	}
 
 	public ItemStack getItem(ItemStack itemStack){
@@ -86,7 +109,7 @@ public class ItemManager
 	for(int i = 0; i < lore.size(); i++)
 		lore.set(i,lore.get(i).replaceAll("&","§"));
 
-	meta.setDisplayName(config.getString(name + ".Name"));
+	meta.setDisplayName(config.getString(name + ".Name").replaceAll("&", "§"));
 	meta.setLore(lore);
 
 	itemStack.setItemMeta(meta);

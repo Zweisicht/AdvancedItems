@@ -6,17 +6,17 @@ Settings:
         use_hook: ''
         destroy: 'Dein <item> ist dir zu bruch gegangen!'
 Jetpack:
-    Name: Jetpack
+    Name: &eJetpack
     Lore:
     - &fRechtsklick zum anlegen.
     - &fDanach doppel sprung zum losfliegen!
     - '&7Durability: 100'
 Glider:
-    Name: Gleiter
+    Name: &eGleiter
     Lore:
     - &fRechtsklick um zu Gleiten.
     - '&7Durability: 50'
 Hook:
-    Name: Enterhaken
+    Name: &eEnterhaken
     Lore:
     - &fRechtsklick um dich rüberzuschwingen.

@@ -32,7 +32,11 @@ public class Listeners  implements Listener
 
 			if(plugin.itemManager.isItem(itemManager.JETPACK, p.getItemInHand())){
 
-				if(!e.getPlayer().hasPermission("MythicCraft.JetPack")) return;
+				if(!e.getPlayer().hasPermission("MythicCraft.jetpack")){
+					e.setCancelled(true);
+					return;
+				}
+
 
 				if(p.getInventory().getChestplate() != null){
 					ItemStack chestplate = p.getInventory().getChestplate().clone();
@@ -50,7 +54,7 @@ public class Listeners  implements Listener
 
 			if(plugin.itemManager.isItem(itemManager.GLIDER, p.getItemInHand())){
 
-				if(!e.getPlayer().hasPermission("MythicCraft.Glider")) return;
+				if(!e.getPlayer().hasPermission("MythicCraft.glider")) return;
 
 				itemManager.useGlider(p);
 				e.setCancelled(true);
@@ -100,7 +104,7 @@ public class Listeners  implements Listener
 
 		if(plugin.itemManager.isItem(itemManager.HOOK, p.getItemInHand())){
 
-			if(!e.getPlayer().hasPermission("MythicCraft.Hook")) return;
+			if(!e.getPlayer().hasPermission("MythicCraft.hook")) return;
 
 			Location b_below = e.getHook().getLocation().subtract(new Vector(0,1,0));
 			if(b_below.getBlock().getType() != Material.AIR){

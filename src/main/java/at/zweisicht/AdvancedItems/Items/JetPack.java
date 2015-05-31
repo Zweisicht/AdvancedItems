@@ -53,39 +53,19 @@ public class JetPack
 		if(!jetpack.hasItemMeta()) return;
 
 		ItemMeta meta = jetpack.getItemMeta();
-		List<String> lore = meta.getLore();
 
 		if(!itemStack.getItemMeta().getDisplayName().contains(meta.getDisplayName())) return;
-
-		String name = meta.getDisplayName();
 
 		if(flyMode.containsKey(p.getUniqueId())){
 			flyMode.get(p.getUniqueId()).cancel();
 			flyMode.remove(p.getUniqueId());
 		}else{
 
-			for(int i = 0; i < meta.getLore().size(); i++){
-
-				if(lore.get(i).contains("Durability:")){
-
-					int dura = Integer.parseInt(lore.get(i).substring(12));
-					lore.set(i,"Durability: " + (dura -1));
-
-					if(dura == 0){
-						p.sendMessage(plugin.getConfig().getString("Settings.Language.destory").replace("&","§").replace("<item>", name));
-						p.getInventory().setChestplate(null);
-						p.updateInventory();
-						return;
-					}
-				}
-			}
-			p.sendMessage(plugin.getConfig().getString("Settings.Language.jetpack").replace("&","§"));
+			p.sendMessage(plugin.getConfig().getString("Settings.Language.use_jetpack").replaceAll("&","§"));
+			itemManager.setDurability(p, jetpack);
 			flyMode.put(p.getUniqueId(), new FlyMode(p).runTaskTimer(plugin, 1, 1));
-		}
 
-		meta.setLore(lore);
-		jetpack.setItemMeta(meta);
-		p.updateInventory();
+		}
 		
 	}
 
@@ -99,7 +79,7 @@ public class JetPack
 			this.p = p;
 		}
 
-		//@Override
+		@Override
 		public void run(){
 
 			Block b = p.getLocation().getBlock();

@@ -12,7 +12,6 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 public class Glider
@@ -52,8 +51,6 @@ public class Glider
 		if(!glider.hasItemMeta()) return;
 
 		ItemMeta meta = glider.getItemMeta();
-		List<String> lore = meta.getLore();
-
 
 		if(!itemStack.getItemMeta().getDisplayName().contains(meta.getDisplayName())) return;
 
@@ -62,30 +59,11 @@ public class Glider
 			glideMode.remove(p.getUniqueId());
 		}else{
 
-			for(int i = 0; i < meta.getLore().size(); i++){
-
-				if(lore.get(i).contains("Durability:")){
-
-					int dura = Integer.parseInt(lore.get(i).substring(12));
-					lore.set(i,"Durability: " + (dura -1));
-
-					if(dura == 0){
-						p.sendMessage(plugin.getConfig().getString("Settings.Language.destory").replace("&","§").replace("<item>", meta.getDisplayName()));
-						p.setItemInHand(null);
-						p.updateInventory();
-						return;
-					}
-				}
-			}
-
-			p.sendMessage(plugin.getConfig().getString("Settings.Language.glider").replace("&","§"));
+			itemManager.setDurability(p, glider);
+			p.sendMessage(plugin.getConfig().getString("Settings.Language.use_glider").replace("&", "§"));
 			glideMode.put(p.getUniqueId(), new GliderMode(p).runTaskTimer(plugin, 1, 1));
+
 		}
-
-		meta.setLore(lore);
-		glider.setItemMeta(meta);
-		p.updateInventory();
-
 	}
 
 	public class GliderMode extends BukkitRunnable
